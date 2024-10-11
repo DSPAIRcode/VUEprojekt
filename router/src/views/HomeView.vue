@@ -17,5 +17,14 @@ const tid = ref(new Date().toLocaleString())
       denna sida har visats:
       <b>{{ views }}</b> gånger
     </p>
+    <ul>
+        två till synes lika länkar som fungerar på olika sätt:
+        <li>
+          <a href="/my">My view</a>
+        </li>
+        <li>
+          <RouterLink to="/my">My view</RouterLink>
+        </li>
+      </ul>
   </main>
 </template>
