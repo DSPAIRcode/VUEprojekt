@@ -1,5 +1,6 @@
 <script setup>
 const props = defineProps(["user"])
+
 </script>
 <template>
     <div class="card">

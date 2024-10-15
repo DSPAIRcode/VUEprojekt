@@ -14,7 +14,7 @@ provide("HomeViews", HomeViews);
         <RouterLink to="/">Home</RouterLink> |
         <RouterLink to="/about">About</RouterLink> |
         <RouterLink to="/my">Min sida</RouterLink> |
-        <RouterLink to="/Users">Användarsida</RouterLink>
+        <RouterLink to="/User">Användarsida</RouterLink>
       </nav>
     </div>
   </header>
