@@ -22,9 +22,6 @@ onMounted(() => {
     <p class="location">long: <span>{{ location.long.toFixed(3) }}</span></p>
     <ForecastResult :forecast="info" />
 
-    <div>
-        {{ info }}
-    </div>
 </template>
 
 <style scoped>

@@ -40,7 +40,7 @@ function transformData(raw) {
             },
             wind: {
                 direction: raw.daily.wind_direction_10m_dominant[i],
-                speed: raw.daily.wind_speed_10m_max,
+                speed: raw.daily.wind_speed_10m_max[i],
                 gusts: raw.daily.wind_gusts_10m_max[i],
                 units: raw.daily_units.wind_speed_10m_max,
             },
