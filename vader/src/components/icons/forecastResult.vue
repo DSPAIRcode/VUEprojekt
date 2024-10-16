@@ -26,7 +26,7 @@ function getText(code)  {
         <li>
             {{ getText(day.code) }}
         </li>
-        <li> {{ day.temp.min }} - {{ day.temp.max }}{{ day.temp.unit }}</li>
+        <li> {{ day.temp.min }} - {{ day.temp.max }}°{{ day.temp.unit }}</li>
         <li> {{ day.precipitation.sum }}{{ day.precipitation.unit }}<br>({{ day.precipitation.probability }}%)</li>
         <li> {{ Math.round(day.wind.speed) }}({{ Math.round(day.wind.gusts) }}){{ day.wind.unit }}<br>{{ day.wind.direction }}{{ day.wind.direction_unit }}</li>
     </ul>

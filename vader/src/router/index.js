@@ -1,4 +1,5 @@
 import ForecastView from '@/views/ForecastView.vue'
+import LocationView from '@/views/LocationView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 
@@ -9,6 +10,11 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: ForecastView,
+    },
+    {
+      path: "/locations",
+      name: "locations",
+      component: LocationView,
     }
   ],
 })

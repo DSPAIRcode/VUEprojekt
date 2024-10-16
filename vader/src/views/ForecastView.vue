@@ -1,4 +1,5 @@
 <script setup>
+// DETTA ÄR HOME SIDAN!!
 import ForecastResult from "@/components/icons/forecastResult.vue";
 import { getForecast } from "@/forecastService";
 import { onMounted, ref } from "vue";
