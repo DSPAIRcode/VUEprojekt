@@ -15,7 +15,13 @@ const router = createRouter({
       path: "/locations",
       name: "locations",
       component: LocationView,
-    }
+    },
+    {
+      path: "/forecast/:location",
+      name: "forecast",
+      component: ForecastView,
+      props: true,
+    },
   ],
 })
 

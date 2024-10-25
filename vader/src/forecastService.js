@@ -1,7 +1,7 @@
 export function getForecast(location) {
     return new Promise((resolve, reject) => {
         fetch(
-            `https://api.open-meteo.com/v1/forecast?latitude=${location.lat}&longitude=${location.long}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,wind_speed_10m_max,wind_gusts_10m_max,wind_direction_10m_dominant&wind_speed_unit=ms&timezone=auto`,
+            `https://api.open-meteo.com/v1/forecast?latitude=${location.position.lat}&longitude=${location.position.long}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,wind_speed_10m_max,wind_gusts_10m_max,wind_direction_10m_dominant&wind_speed_unit=ms&timezone=auto`,
         )
         .then(response => {
             if (response.ok) {
@@ -12,6 +12,24 @@ export function getForecast(location) {
         })
         .then(data => {
             resolve(transformData(data))
+        })
+    })
+}
+
+export function getCurrentWeather(location) {
+    return new Promise((resolve, reject) => {
+        fetch(
+            `https://api.open-meteo.com/v1/forecast?latitude=${location.position.lat}&longitude=${location.position.long}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,cloud_cover,pressure_msl,wind_speed_10m,wind_direction_10m,wind_gusts_10m&wind_speed_unit=ms`,
+        )
+        .then(response => {
+            if (response.ok) {
+                return response.json()
+            } else {
+                reject(response.json())
+            }
+        })
+        .then(currentData => {
+            resolve(currentDataTrans(currentData))
         })
     })
 }
@@ -48,4 +66,43 @@ function transformData(raw) {
         weatherData.weather.push(data)
     }
     return weatherData
+}
+
+
+function currentDataTrans(raw) {
+    let weatherData = {};
+
+    weatherData.position = {
+        lat: raw.location.lat,
+        long: raw.location.lon,
+    };
+
+        weatherData.timezone = {
+            name: raw.location.tz_id,
+            localtime: raw.location.localtime,
+        };
+
+            weatherData.current = {
+                locationName: raw.location.name,
+                temperature: {
+                    value: raw.current.temp_c,
+                    unit: "C",
+                },
+                condition: {
+                    code: raw.current.condition.code,
+                    description: raw.current.condition.text,
+                },
+                wind: {
+                    speed: raw.current.wind_kph,
+                    unit: "m/h",
+                    direction: raw.current.wind_dir,
+                },
+                humidity: raw.current.humidity,
+                pressure: {
+                    value: raw.current.pressure_mb,
+                    unit: "mb",
+                },
+            };
+
+    return weatherData;
 }

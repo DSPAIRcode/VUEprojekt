@@ -16,7 +16,6 @@ function getText(code)  {
 <template>
     <ul>
         <li>Date</li>
-        <li>Code</li>
         <li>Temp</li>
         <li>Precip</li>
         <li>Wind</li>

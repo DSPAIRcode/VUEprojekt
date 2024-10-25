@@ -1,19 +1,46 @@
 <script setup>
-import { ref } from "vue"
+import router from "@/router";
+import { getPosition } from "@/services/positioningService";
+import { onMounted, ref } from "vue"
 // DETTA ÄR LOCATIONS SIDAN!
 
-const location = ref({ name: "", position: { lat: 0, long: 0}, default: false})
+onMounted(() => {
+    locationList.value = JSON.parse(localStorage.getItem("locations"))
 
-const locationList = ref([
-    { name: "Mariehamn", position: { lat: 60.0, long: 20.0 } , default: false },
-    { name: "Stockholm", position: { lat: 59.32, long: 18.32 } , default: true },
-    { name: "London", position: { lat: 51.5, long: -0.1 } , default: false },
-    { name: "Cape town", position: { lat: -34, long: 18.5 } , default: false },
-])
+    let current = locationList.value.find(loc => {
+        return loc.name === "Current location"
+    })
+    if (!current) {
+        current = { name: "Current location",
+            position: { lat: 0, long: 0 }, default: false }
+        locationList.value.unshift(current)
+    }
+
+    getPosition()
+        .then(response => {
+            current.position = response.position
+            let index = locationList.value.findIndex(loc => {
+                return loc.name === "Current location"
+            })
+            locationList.value.splice(index, 1, current);
+        })
+        .catch(eer => {
+            let index = locationList.value.findIndex(loc => {
+                return loc.name === "Current position"
+            })
+            locationList.value.splice(index, 1);
+            console.log(eer)
+        })
+})
+
+const location = ref({ name: "", position: { lat: 0, long: 0}, default: false})
+const locationList = ref([])
 
 function Save() {
     locationList.value.push({ ...location.value })
     Reset()
+
+    localStorage.setItem("locations", JSON.stringify(locationList.value))
 }
 
 function Reset() {
@@ -22,12 +49,16 @@ function Reset() {
 
 function remove(loc)   {
     locationList.value = locationList.value.filter(item => item !== loc)
+
+    localStorage.setItem("locations", JSON.stringify(locationList.value))
 }
 
 function setDefault(loc) {
     locationList.value.forEach(item => {
         item.default = (item === loc)
     })
+    localStorage.setItem("locations", JSON.stringify(locationList.value))
+    router.push(`/forecast/${loc.name}`)
 }
 </script>
 
@@ -44,7 +75,7 @@ function setDefault(loc) {
                     {{ loc.name }},
                     ( {{ Math.abs(loc.position.lat).toFixed(2) }}°{{ loc.position.lat > 0 ? 'N' : 'S' }}
                     {{ Math.abs(loc.position.long).toFixed(2) }}°{{ loc.position.long > 0 ? 'E' : 'W' }} )
-                    <span class="raderaknapp" title="remove" @click="remove(loc)">❌</span>
+                    <span v-show="loc.name !== 'Current location'" class="raderaknapp" title="remove" @click="remove(loc)">❌</span>
                 </li>
             </ul>
 </template>
