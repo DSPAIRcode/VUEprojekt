@@ -15,7 +15,7 @@ function getText(code)  {
 
 <template>
     <ul>
-        <li>Date</li>
+        <li>Date: </li>
         <li>Temp</li>
         <li>Precip</li>
         <li>Wind</li>

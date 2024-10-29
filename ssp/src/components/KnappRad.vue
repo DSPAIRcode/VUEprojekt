@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from "vue";
+import { watch } from "vue";
 
 const props = defineProps(["knappar", "reset"]);
 const emit = defineEmits(["valdaKnappar"]);
@@ -55,7 +55,7 @@ function datorval() {
 button  {
   padding: .6em 1.2em;
   font-size: 1.2em;
-  background-color: beige;
+  background-color: rgb(255, 255, 255);
   border: 1px solid #ccc;
   border-radius: 5px;
   cursor: pointer;
@@ -67,15 +67,11 @@ button  {
   gap: .6em;
 }
 
-button:hover.alternativ {
-  background-color: rgb(202, 202, 183);
-}
-
 button.spelarval {
   background-color: rgb(0, 218, 40);
 }
 
 button.datorval {
-  border: red solid 2px;
+  border: red solid 3px;
 }
 </style>
