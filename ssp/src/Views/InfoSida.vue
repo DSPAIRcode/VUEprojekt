@@ -20,7 +20,6 @@
            sina tekniska missöden älskade eleverna Jimmy. Hans entusiasm smittade
             av sig, och mellan alla små missöden lärde de sig både om IT 
             och om att ta saker med ett leende.</p><br>
-            <p>100% not made in ChatGPT</p>
         <img src="@/assets/tax.png" alt="TaxThePoor" width="200" height="auto">
       </header>
     </div>
