@@ -2,9 +2,10 @@
 import { ref, watch } from "vue";
 
 const props = defineProps(["valdaKnappar", "reset"])
-const emit = defineEmits(["vinnare"])
+const emit = defineEmits(["vinnare"]) // Definierar emit för att skicka händelsen "vinnare"
 const resultat = ref("Låt spelet börja!")
 
+// övervakar props (valdaKnappar) och uppdaterar resultatet baserat på spelets regler
 watch(props, () => {
     console.log("Resultatet har ändrats till:", props.valdaKnappar)
     if (props.valdaKnappar.spelare == props.valdaKnappar.dator) {
