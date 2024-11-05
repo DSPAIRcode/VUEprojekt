@@ -24,13 +24,23 @@ watch(() => props.reset, () => {
 <template>
     <div class="score">
         <p>
-            <span id="spelare">
-                {{ score.spelare }}
-            </span> - <span id="dator">
-                {{ score.dator }}
-            </span>
+            <span id="player-score">{{ score.spelare }}</span> - 
+            <span id="computer-score">{{ score.dator }}</span>
         </p>
     </div>
 </template>
+
 <style scoped>
+#player-score {
+  color: rgb(126, 255, 126);
+}
+
+#computer-score {
+  color: rgb(255, 0, 0);
+}
+
+.score {
+  font-size: 1.5em;
+  text-align: center;
+}
 </style>

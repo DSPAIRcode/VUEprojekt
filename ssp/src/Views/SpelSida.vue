@@ -2,26 +2,26 @@
 import { ref } from "vue";
 import KnappRad from "../components/KnappRad.vue";
 import ResultatRad from "../components/ResultatRad.vue";
-import PoangRad from "../components/PoangRad.vue";
+import PoangRad from "../components/PoangRad.vue"; // Här importeras Sidorna så att de kan användas som komponenter
   
   const knappar = ref(["Sten", "Sax", "Påse"]);
   const resultat = ref({});
   const vinnare = ref("");
-  const reset = ref(true);
+  const reset = ref(true); // Här definieras variabler men REF
   
   function hittaVinnare(valdaKnappar) {
     reset.value = false;
     vinnare.value = "";
     let spelare = knappar.value.indexOf(valdaKnappar.spelare);
     let dator = knappar.value.indexOf(valdaKnappar.dator);
-    resultat.value = { spelare: spelare, dator: dator };
+    resultat.value = { spelare: spelare, dator: dator }; // Bestämmer och sparar spelarens och datorns val som index, vilket används för att avgöra omgångens resultat.
   }
   
-  function raknaPoang(v) {
+  function raknaPoang(v) { // Uppdaterar vinnare-variabeln med namnet på vinnaren så att resultatet kan visas i gränssnittet.
     vinnare.value = v;
   }
   
-  function resetSpelet() {
+  function resetSpelet() { //  återställer spelet till sitt startläge
     reset.value = true;
   }
 </script>
@@ -29,6 +29,7 @@ import PoangRad from "../components/PoangRad.vue";
 <template>
     <div>
       <header>
+        <br><br><br><br>
       </header>
       <main>
         <KnappRad :knappar="knappar" :reset="reset" @valda-knappar="hittaVinnare" />
@@ -66,7 +67,7 @@ import PoangRad from "../components/PoangRad.vue";
   }
   
   .score  {
-    font-size: 1.2em;
+    font-size: 1.4em;
     text-align: center;
   }
   
@@ -79,10 +80,9 @@ import PoangRad from "../components/PoangRad.vue";
   }
   
   #nolla {
-    margin-top: 2em;
-    padding: .3em .6em;
     font-size: .8em;
     background-color: white;
+    margin: 1.2em 0;
   }
 
   #nolla:hover {

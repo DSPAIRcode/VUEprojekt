@@ -1,15 +1,9 @@
 <script setup>
-import { RouterLink } from 'vue-router';
 </script>
 
 <template>
-  <div class="start-sida">
-    <h1 class="Text1">Välkommen till Sten, Sax, Påse!</h1>
-      <RouterLink to="/classic" class="KnappSSP">Classic</RouterLink>
-      <RouterLink to="/info" class="KnappSSP">Information</RouterLink>
-      <br>
-  </div> <!-- Har laggt till routing så att man kan växla mellan sidor -->
-  <RouterView />
+  <div> <!-- denna sida används som start sida när man kommer till sidan för första gången -->
+  </div>
 </template>
 
 <style scoped>
